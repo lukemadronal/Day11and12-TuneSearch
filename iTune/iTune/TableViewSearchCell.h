@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TableViewSearchCell.h
 //  iTune
 //
 //  Created by Luke Madronal on 10/5/15.
@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Reachability.h"
 
-@interface ViewController : UIViewController
-
+@interface TableViewSearchCell : UITableViewCell
 
 
 @end
-

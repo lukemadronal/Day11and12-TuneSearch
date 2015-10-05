@@ -13,6 +13,8 @@
 		01E3DABC1BC2E645006D9132 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E3DABA1BC2E645006D9132 /* Main.storyboard */; };
 		01E3DABE1BC2E645006D9132 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01E3DABD1BC2E645006D9132 /* Assets.xcassets */; };
 		01E3DAC11BC2E645006D9132 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01E3DABF1BC2E645006D9132 /* LaunchScreen.storyboard */; };
+		01E3DACA1BC2E7DD006D9132 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3DAC91BC2E7DD006D9132 /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
+		01E3DACD1BC306F5006D9132 /* TableViewSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3DACC1BC306F5006D9132 /* TableViewSearchCell.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		01E3DABD1BC2E645006D9132 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01E3DAC01BC2E645006D9132 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01E3DAC21BC2E645006D9132 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01E3DAC81BC2E7DD006D9132 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		01E3DAC91BC2E7DD006D9132 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		01E3DACB1BC306F5006D9132 /* TableViewSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewSearchCell.h; sourceTree = "<group>"; };
+		01E3DACC1BC306F5006D9132 /* TableViewSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewSearchCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +66,13 @@
 			children = (
 				01E3DAB41BC2E645006D9132 /* AppDelegate.h */,
 				01E3DAB51BC2E645006D9132 /* AppDelegate.m */,
+				01E3DAC81BC2E7DD006D9132 /* Reachability.h */,
+				01E3DAC91BC2E7DD006D9132 /* Reachability.m */,
 				01E3DAB71BC2E645006D9132 /* ViewController.h */,
 				01E3DAB81BC2E645006D9132 /* ViewController.m */,
 				01E3DABA1BC2E645006D9132 /* Main.storyboard */,
+				01E3DACB1BC306F5006D9132 /* TableViewSearchCell.h */,
+				01E3DACC1BC306F5006D9132 /* TableViewSearchCell.m */,
 				01E3DABD1BC2E645006D9132 /* Assets.xcassets */,
 				01E3DABF1BC2E645006D9132 /* LaunchScreen.storyboard */,
 				01E3DAC21BC2E645006D9132 /* Info.plist */,
@@ -151,7 +161,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				01E3DAB91BC2E645006D9132 /* ViewController.m in Sources */,
+				01E3DACD1BC306F5006D9132 /* TableViewSearchCell.m in Sources */,
 				01E3DAB61BC2E645006D9132 /* AppDelegate.m in Sources */,
+				01E3DACA1BC2E7DD006D9132 /* Reachability.m in Sources */,
 				01E3DAB31BC2E645006D9132 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +313,7 @@
 				01E3DAC71BC2E645006D9132 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
