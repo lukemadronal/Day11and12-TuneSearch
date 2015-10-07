@@ -10,7 +10,11 @@
 
 @interface DetailViewController ()
 
-
+@property(nonatomic,weak)IBOutlet UILabel *trackName;
+@property(nonatomic,weak)IBOutlet UILabel *artistName;
+@property(nonatomic,weak)IBOutlet UILabel *trackLength;
+@property(nonatomic,weak)IBOutlet UILabel *trackPrice;
+@property(nonatomic,weak)IBOutlet UILabel *albumName;
 
 @end
 
@@ -18,6 +22,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _trackName.text = [_currentTrack objectForKey:@"trackName"];
+    _albumName.text = [_currentTrack objectForKey:@"collectionName"];
+    double time =[[_currentTrack objectForKey:@"trackTimeMillis"] doubleValue];
+    NSString* timeString = [NSString stringWithFormat:@"%f", (time/1000)/60];
+    _trackLength.text =timeString;
+    _artistName.text = [_currentTrack objectForKey:@"artistName"];
+    
+    
+     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+     _trackPrice.text = [formatter stringFromNumber:[_currentTrack objectForKey:@"trackPrice"]];
+
     // Do any additional setup after loading the view.
 }
 

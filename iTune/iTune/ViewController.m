@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "TableViewSearchCell.h"
 #import "DetailViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -20,6 +21,7 @@
 @property (nonatomic,strong) NSMutableArray     *trackMutableArray;
 @property (nonatomic,strong) NSURL              *currentURL;
 @property (nonatomic,strong) NSString           *currentURLString;
+
 
 @end
 
@@ -180,8 +182,7 @@ bool serverAvailable;
         contactCell.imageView.image = [UIImage imageNamed:[[self getDocumentsDirectory] stringByAppendingPathComponent:fileName]];
     } else {
         NSLog(@"not local %@",fileName);
-//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileName]];
-//        contactCell.imageView.image = [UIImage imageWithData:imageData];
+
         [self getImageFromServer:fileName fromUrl:url atIndexPath:indexPath];
     }
     return contactCell;
@@ -195,7 +196,9 @@ bool serverAvailable;
     
     DetailViewController *destController = [segue destinationViewController];
     if ([[segue identifier] isEqualToString:@"segueToDetail"]) {
-        destController.trackName.text=@"boom";
+        NSIndexPath *indexPath = [_searchTableView indexPathForSelectedRow];
+        NSDictionary *trackDict = _trackMutableArray[indexPath.row];
+        destController.currentTrack = trackDict;
     }
 }
 

@@ -10,11 +10,6 @@
 
 @interface DetailViewController : UIViewController
 
-@property(nonatomic,weak)IBOutlet UILabel *trackName;
-@property(nonatomic,weak)IBOutlet UILabel *artistName;
-@property(nonatomic,weak)IBOutlet UILabel *trackLength;
-@property(nonatomic,weak)IBOutlet UILabel *trackPrice;
-@property(nonatomic,weak)IBOutlet UILabel *trackReleaseDate;
-@property(nonatomic,weak)IBOutlet UILabel *albumName;
+@property (nonatomic, strong) NSDictionary *currentTrack;
 
 @end
