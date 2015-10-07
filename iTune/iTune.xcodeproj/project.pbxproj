@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01D88E621BC4A80200314F56 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D88E611BC4A80200314F56 /* DetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		01E3DAB31BC2E645006D9132 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3DAB21BC2E645006D9132 /* main.m */; };
 		01E3DAB61BC2E645006D9132 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3DAB51BC2E645006D9132 /* AppDelegate.m */; };
 		01E3DAB91BC2E645006D9132 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3DAB81BC2E645006D9132 /* ViewController.m */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01D88E601BC4A80200314F56 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		01D88E611BC4A80200314F56 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		01E3DAAE1BC2E645006D9132 /* iTune.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTune.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01E3DAB21BC2E645006D9132 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01E3DAB41BC2E645006D9132 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 				01E3DAB71BC2E645006D9132 /* ViewController.h */,
 				01E3DAB81BC2E645006D9132 /* ViewController.m */,
 				01E3DABA1BC2E645006D9132 /* Main.storyboard */,
+				01D88E601BC4A80200314F56 /* DetailViewController.h */,
+				01D88E611BC4A80200314F56 /* DetailViewController.m */,
 				01E3DACB1BC306F5006D9132 /* TableViewSearchCell.h */,
 				01E3DACC1BC306F5006D9132 /* TableViewSearchCell.m */,
 				01E3DABD1BC2E645006D9132 /* Assets.xcassets */,
@@ -165,6 +170,7 @@
 				01E3DAB61BC2E645006D9132 /* AppDelegate.m in Sources */,
 				01E3DACA1BC2E7DD006D9132 /* Reachability.m in Sources */,
 				01E3DAB31BC2E645006D9132 /* main.m in Sources */,
+				01D88E621BC4A80200314F56 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

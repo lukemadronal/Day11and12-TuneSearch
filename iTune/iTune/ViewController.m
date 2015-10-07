@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TableViewSearchCell.h"
+#import "DetailViewController.h"
 
 @interface ViewController ()
 
@@ -188,6 +189,14 @@ bool serverAvailable;
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 88;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    DetailViewController *destController = [segue destinationViewController];
+    if ([[segue identifier] isEqualToString:@"segueToDetail"]) {
+        destController.trackName.text=@"boom";
+    }
 }
 
 
