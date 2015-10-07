@@ -13,10 +13,12 @@
 
 @property (nonatomic,weak) NSString *hostName;
 
-@property (nonatomic,weak) IBOutlet UITableView *resultsTableView;
+@property (nonatomic,weak) IBOutlet UITableView *searchTableView;
 @property (nonatomic,weak) IBOutlet UITextField *searchTextField;
 @property (nonatomic,strong) NSMutableArray     *albumMutableArray;
 @property (nonatomic,strong) NSMutableArray     *trackMutableArray;
+@property (nonatomic,strong) NSURL              *currentURL;
+@property (nonatomic,strong) NSString           *currentURLString;
 
 @end
 
@@ -76,6 +78,18 @@ bool serverAvailable;
     [self updateReachablityStatus:currReach];
 }
 
+-(NSString *) getDocumentsDirectory {
+    NSArray *paths= NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true);
+    NSLog(@"DocPath:%@",paths[0]);
+    return paths[0];
+}
+
+-(BOOL)fileIsLocal:(NSString *)fileName {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [[self getDocumentsDirectory] stringByAppendingPathComponent:fileName];
+    return [fileManager fileExistsAtPath:filePath];
+}
+
 # pragma mark - Interactivty Methods
 
 -(IBAction)getFilePressed:(id)sender {
@@ -84,9 +98,10 @@ bool serverAvailable;
         //      NSURL *fileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/classfiles/iOS_URL_Class_Get_File.txt",_hostName]];
         //        NSURL *fileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/classfiles/flavors.json",_hostName]];
         NSString *searchName = _searchTextField.text;
-        NSURL *fileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=m%@",searchName]];
+        _currentURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=m%@",searchName]];
+        _currentURLString = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=m%@",searchName];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:fileUrl];
+        [request setURL:_currentURL];
         [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
         [request setTimeoutInterval:30.0];
         NSURLSession *session = [NSURLSession sharedSession];
@@ -105,13 +120,40 @@ bool serverAvailable;
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //MAIN THREAD CODE GOES HERE
-                    [_resultsTableView reloadData];
+                    [_searchTableView reloadData];
                     NSLog(@"size is: %li",_trackMutableArray.count);
                 });
             } else {
                 NSLog(@"DONT Got Data");
             }
         }] resume];
+    } else {
+        NSLog(@"server not available");
+    }
+}
+
+-(void)getImageFromServer:(NSString *)localFileName fromUrl:(NSString *)fullFileName atIndexPath:(NSIndexPath *)indexPath {
+    if(serverAvailable) {
+        NSURL *fileURL = [NSURL URLWithString:fullFileName];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
+        [request setURL:fileURL];
+        [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+        [request setTimeoutInterval:30.0];
+        NSURLSession *session = [NSURLSession sharedSession];
+        [[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if ([data length] > 0 && error==nil) {
+                NSString *savedFilePath = [[self getDocumentsDirectory] stringByAppendingPathComponent:localFileName];
+                UIImage *imageTemp = [UIImage imageWithData:data];
+                if (imageTemp != nil) {
+                    [data writeToFile:savedFilePath atomically:true];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [_searchTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    });
+                }
+            } else {
+                NSLog(@"no data");
+            }
+        }]resume];
     } else {
         NSLog(@"server not available");
     }
@@ -128,6 +170,19 @@ bool serverAvailable;
     NSDictionary *trackDict = _trackMutableArray[indexPath.row];
     contactCell.textLabel.text = [trackDict objectForKey:@"trackName"];
     contactCell.detailTextLabel.text = [trackDict objectForKey:@"collectionName"];
+    NSLog(@"this is the last thing that i printed");
+    NSString *url = [trackDict objectForKey:@"artworkUrl60"];
+    NSString *fileName = [url stringByReplacingOccurrencesOfString:@":" withString:@""];
+    fileName = [url stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    if ([self fileIsLocal:fileName] ) {
+        NSLog(@"LOCAAALLLLLLLLLŁLLLLLLLLLLLLLLLLLLLLLLL %@",fileName);
+        contactCell.imageView.image = [UIImage imageNamed:[[self getDocumentsDirectory] stringByAppendingPathComponent:fileName]];
+    } else {
+        NSLog(@"not local %@",fileName);
+//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileName]];
+//        contactCell.imageView.image = [UIImage imageWithData:imageData];
+        [self getImageFromServer:fileName fromUrl:url atIndexPath:indexPath];
+    }
     return contactCell;
 }
 
